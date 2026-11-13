@@ -1,0 +1,27 @@
+{
+  "name": "toolbridge-mcp",
+  "version": "1.0.0",
+  "description": "MCP server connecting an AI to (fictional) internal company tools: directory, wiki, IT tickets, on-call, assets, expenses and read-only metrics SQL, with roles, dry-run writes, an audit log and prompt-injection flags. Plus an in-browser playground.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "toolbridge-mcp": "bin/toolbridge-mcp.js" },
+  "files": ["bin", "server", "core", "examples", "README.md", "LICENSE"],
+  "engines": { "node": ">=20.19" },
+  "scripts": {
+    "start": "node bin/toolbridge-mcp.js stdio",
+    "http": "node bin/toolbridge-mcp.js http --dev-tokens",
+    "test": "node --test test/*.test.js",
+    "build:vendor": "node scripts/build-vendor.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/node": "2.1.2",
+    "@modelcontextprotocol/server": "2.4.0",
+    "sql.js": "1.16.0"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.4.0",
+    "esbuild": "^0.28.2"
+  },
+  "repository": { "type": "git", "url": "https://github.com/shaikbasha1437/toolbridge-mcp.git" },
+  "homepage": "https://shaikbasha1437.github.io/toolbridge-mcp/"
+}
