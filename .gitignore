@@ -1,0 +1,7 @@
+node_modules/
+.data/
+data/
+*.log
+audit*.jsonl
+.DS_Store
+*.tgz
