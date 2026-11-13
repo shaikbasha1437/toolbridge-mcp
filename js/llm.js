@@ -1,7 +1,7 @@
 /* Bring-your-own-key LLM client with tool (function) calling, called straight from the browser:
    OpenAI, Anthropic (with the anthropic-dangerous-direct-browser-access header), Google Gemini, or any
-   OpenAI-compatible endpoint (OpenRouter, Ollama, LM Studio, vLLM). Derived from the AgentKit provider
-   module used across this project series, extended with a provider-neutral tool-calling message format:
+   OpenAI-compatible endpoint (OpenRouter, Ollama, LM Studio, vLLM). Derived from a shared helper
+   provider module, extended with a provider-neutral tool-calling message format:
      { role:'user', content } | { role:'assistant', content, toolCalls:[{ id, name, args }] } | { role:'tool', toolCallId, name, content }
    The API key only ever goes into the request headers (or Gemini's x-goog-api-key header), never into prompts. */
 export const PRICES = {
