@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ToolBridge MCP: connect an AI to internal tools (playground)</title>
+  <meta name="description" content="An MCP server that connects an AI to (fictional) internal tools: directory, wiki, IT tickets, on-call, assets, expenses and read-only metrics SQL, with roles, dry-run writes, audit log and prompt-injection flags. Try it in the browser.">
+  <meta name="theme-color" content="#17233b">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <script>try { var t = localStorage.getItem('tb.theme'); if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark'); } catch (e) {}</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="./"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M76 300 Q256 120 436 300" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round"/><path d="M60 330 H452" stroke="currentColor" stroke-width="40" stroke-linecap="round"/></svg>ToolBridge MCP</a>
+    <div class="conn" id="conn">
+      <span class="pill" id="conn-pill">Starting…</span>
+      <label class="sr-only" for="role">Role</label>
+      <select id="role" title="Role of the built-in server token"><option value="viewer">viewer</option><option value="agent" selected>agent</option><option value="admin">admin</option></select>
+      <button type="button" id="btn-connect">Connect…</button>
+    </div>
+    <nav>
+      <button type="button" id="btn-settings">AI settings</button>
+      <button type="button" id="btn-about">About</button>
+      <button type="button" id="btn-theme" aria-label="Toggle dark mode">◐</button>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow">MODEL CONTEXT PROTOCOL · PROJECT 10 OF 15</p>
+      <h1>Connect an AI to internal tools, safely.</h1>
+      <p>A real MCP server (official TypeScript SDK) for a fictional company, Brightwave Labs: directory, wiki, IT tickets, on-call, assets, expenses and read-only metrics SQL. This page runs the same server code in your browser, so you can browse it, call tools, watch the JSON-RPC traffic and audit log, and chat with an agent. Writes are dry runs until you approve them.</p>
+      <div class="status-row" id="status-row"></div>
+    </section>
+    <div class="tabs" role="tablist" aria-label="Sections" id="tabs">
+      <button role="tab" type="button" data-tab="agent" aria-selected="true">Agent</button>
+      <button role="tab" type="button" data-tab="tools" aria-selected="false">Tools <span class="count" id="c-tools"></span></button>
+      <button role="tab" type="button" data-tab="resources" aria-selected="false">Resources <span class="count" id="c-resources"></span></button>
+      <button role="tab" type="button" data-tab="prompts" aria-selected="false">Prompts <span class="count" id="c-prompts"></span></button>
+      <button role="tab" type="button" data-tab="traffic" aria-selected="false">JSON-RPC <span class="count" id="c-traffic"></span></button>
+      <button role="tab" type="button" data-tab="audit" aria-selected="false">Audit log <span class="count" id="c-audit"></span></button>
+      <button role="tab" type="button" data-tab="setup" aria-selected="false">Use it in your client</button>
+    </div>
+    <section class="tabpanel" id="panel" role="tabpanel" aria-live="polite"></section>
+  </main>
+  <footer class="foot">ToolBridge MCP. All company data is fictional (Brightwave Labs, every domain ends in .example). AI keys stay in this browser and go only to the provider you pick; they are never put in prompts, exports or links. <a href="https://github.com/shaikbasha1437/toolbridge-mcp" rel="noopener">Source on GitHub</a> · MIT license.</footer>
+  <div id="modal-host"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="vendor/sqljs/sql-wasm-browser.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script>if ('serviceWorker' in navigator && location.protocol !== 'file:') addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));</script>
+</body>
+</html>
