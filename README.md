@@ -75,7 +75,7 @@ What was actually tested: the stdio command and the HTTP endpoint with the **MCP
 
 | Tool | Min role | Notes |
 |---|---|---|
-| `directory_search`, `directory_get_employee` | viewer | Emails and phones masked for viewers; salary band for admins only |
+| `directory_search`, `directory_get_employee` | viewer | Search returns public fields only (no phones); salary band only for admins |
 | `wiki_search`, `wiki_get_page` | viewer | Returns `resource_link`s to `wiki://pages/{slug}` |
 | `tickets_list`, `ticket_get` | viewer | Filters, pagination, fenced user text |
 | `ticket_create` | agent | Dry run unless `confirm: true` |
