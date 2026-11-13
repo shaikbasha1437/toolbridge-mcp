@@ -19,9 +19,21 @@ Date: 2026-11-13. Node 24.22.1. MCP spec 2026-07-28 (plus 2025-era legacy handsh
 stdio: tools/list (13), resources/list, resources/templates/list, prompts/list, oncall_lookup, ticket_create dry run, ticket_create confirm, IT-1007 injection flagged, SQL DELETE refused, viewer denied, resources/read tickets://IT-1007, prompts/get triage_ticket, audit.jsonl written with mode 600.
 HTTP: tools/list, tools/call, admin audit_recent, viewer denied, wrong token rejected.
 
-## Browser checks on the live site
+## Browser checks on the live site: Chrome 84/84, Firefox 84/84
 
-See the section appended below after the run.
+Playwright against https://shaikbasha1437.github.io/toolbridge-mcp/ (scripts kept outside the repo):
+
+- Fresh visit (built-in server up in about 0.5 s, protocol 2026-07-28, 13 tools, 3 prompts), service worker active, repeat visit controlled by the SW, created tickets persist across reloads.
+- Every modal (about, AI settings, connect, tool run, schema, resource, prompt, approval) closes via X, Cancel, Esc, backdrop click and browser Back. The discard prompt appears for unsaved edits (Esc and Back), and required fields never block Cancel.
+- Demo flows: on-call lookup, wiki answer, IT-1007 injection flagged and not followed, SQL `DELETE` refused, metrics query, ticket create with approval (approve creates it; X, Cancel, Esc, backdrop and Back all count as deny), and viewer denial for writes and expenses.
+- Tool forms: result rendering, inline required-field errors, writes default to a dry run, readable SQL guard and missing-argument errors. Also resource templates (IT-1007 warning header) and prompts/get.
+- JSON-RPC log has entries and export (Authorization masked). Audit log shows ok, dry_run, denied and injection flags, and its JSONL export is redacted. Clear actions have working undo toasts (traffic, audit, chat, reset demo data, saved server).
+- Live mode with fake keys gives a readable error for OpenAI, Anthropic, Gemini and OpenRouter (OpenAI returned a CORS/network error, explained in the message). The key is not in localStorage (remember off), the transcript export, the share link or the traffic log.
+- 375 px mobile: no horizontal overflow on any tab, and modals fit. The theme toggles.
+- Offline reload: the built-in server and demo agent still work.
+- Local server: `toolbridge-mcp http --playground` on 127.0.0.1 connected from the live https page (Chrome with the local-network-access permission granted; Firefox with its LNA pref off). A wrong token gives a readable error. The connection negotiated 2026-07-28 and listed 13 tools, the agent ran against it, and the traffic tab showed the localhost URL.
+
+Bug found by these checks and fixed: Firefox lacks `Request.prototype.body`, so the bundled SDK could not read in-page requests (the built-in server failed to start). The fetch shim now supplies a body stream.
 
 ## Not verified
 
