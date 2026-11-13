@@ -1,0 +1,10 @@
+{
+  "_comment": "STUB adapters: written from public API docs and tested only against mocks. Not run against real Jira, ServiceNow, Slack or Postgres. Every secret must be env:VAR.",
+  "tokens": [{ "name": "agent", "role": "agent", "token": "env:TOOLBRIDGE_AGENT_TOKEN" }],
+  "adapters": {
+    "tickets": { "type": "jira", "baseUrl": "https://your-site.atlassian.net", "email": "bot@your-company.example", "apiToken": "env:JIRA_API_TOKEN", "projectKey": "IT", "issueType": "Task" },
+    "directory": { "type": "slack", "botToken": "env:SLACK_BOT_TOKEN" },
+    "metrics": { "type": "postgres", "connectionString": "env:METRICS_DATABASE_URL", "allowedTables": ["metrics_daily", "deployments", "incidents"], "statementTimeoutMs": 5000 }
+  },
+  "_servicenow_alternative": { "tickets": { "type": "servicenow", "instanceUrl": "https://your-instance.service-now.com", "username": "toolbridge.bot", "password": "env:SERVICENOW_PASSWORD" } }
+}

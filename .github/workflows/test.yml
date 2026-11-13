@@ -1,0 +1,21 @@
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: MCP Inspector CLI smoke test (stdio)
+        run: npx -y @modelcontextprotocol/inspector@2.15.0 --cli node bin/toolbridge-mcp.js stdio --no-persist --method tools/list > tools.json && node -e "const t=require('./tools.json').tools; if(t.length!==13) throw new Error('expected 13 tools, got '+t.length); console.log(t.length+' tools')"

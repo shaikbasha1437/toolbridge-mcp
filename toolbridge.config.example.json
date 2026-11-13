@@ -1,0 +1,17 @@
+{
+  "http": {
+    "host": "127.0.0.1",
+    "port": 8787,
+    "allowedOrigins": ["https://shaikbasha1437.github.io"],
+    "allowedHosts": []
+  },
+  "tokens": [
+    { "name": "my-laptop-agent", "role": "agent", "employee_id": "E011", "token": "sha256:<hex from `toolbridge-mcp token --role agent`>" },
+    { "name": "dashboard-viewer", "role": "viewer", "token": "env:TOOLBRIDGE_VIEWER_TOKEN" }
+  ],
+  "stdio": { "role": "agent", "employee_id": "E011" },
+  "requireConfirm": true,
+  "rateLimits": { "perMinute": 60, "writesPerMinute": 10 },
+  "persist": true,
+  "adapters": {}
+}

@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "toolbridge": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "github:shaikbasha1437/toolbridge-mcp",
+        "stdio"
+      ]
+    }
+  }
+}

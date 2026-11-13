@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "toolbridge": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "github:shaikbasha1437/toolbridge-mcp",
+        "stdio",
+        "--role",
+        "agent"
+      ]
+    }
+  }
+}
