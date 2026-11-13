@@ -57,6 +57,8 @@ export async function getInpageServer(opts) {
   const handler = SDK.createMcpHandler(factory, { responseMode: 'json' });
   const fetchImpl = async (url, init) => {
     const req = new Request(url, init);
+    // Firefox does not implement Request.prototype.body; the SDK reads the body as a stream, so give it one.
+    if (req.body === undefined && init && init.body != null) { const text = typeof init.body === 'string' ? init.body : await new Response(init.body).text(); Object.defineProperty(req, 'body', { value: new Response(text).body, configurable: true }); }
     const m = /^Bearer\s+(\S+)$/i.exec(req.headers.get('authorization') || '');
     const role = m && Object.keys(DEMO_TOKENS).find((r) => DEMO_TOKENS[r] === m[1]);
     if (!role) { audit.record({ principal: 'anonymous', role: 'none', transport: 'in-page', kind: 'auth', name: req.method + ' /mcp', outcome: 'unauthorized' }); return new Response(JSON.stringify({ jsonrpc: '2.0', id: null, error: { code: -32001, message: 'Unauthorized: send Authorization: Bearer <token>.' } }), { status: 401, headers: { 'content-type': 'application/json', 'www-authenticate': 'Bearer realm="toolbridge-mcp"' } }); }
