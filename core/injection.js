@@ -6,7 +6,7 @@ const RULES = [
   ['addressed_to_ai', /\b(note|message|instructions?) (for|to) (the )?(ai|assistant|llm|model|agent|chatbot)\b|\bassistants? reading this\b/i],
   ['tool_call', /\b(call|invoke|use|run|execute)\b[^.\n]{0,20}\b(the )?[a-z]+_[a-z_]+\b[^.\n]{0,40}\b(confirm|with|to set|every|all)\b/i],
   ['exfiltration', /\b(send|email|post|upload|forward|exfiltrate|leak)\b[^.\n]{0,80}\b(to|at)\b[^.\n]{0,40}(@|https?:\/\/)/i],
-  ['secret_request', /\b(reveal|print|show|share|dump|send)\b[^.\n]{0,40}\b(api keys?|tokens?|passwords?|secrets?|credentials?|system prompt)\b/i],
+  ['secret_request', /\b(reveal|print|dump|disclose|output|leak|send)\b[^.\n]{0,20}\b(your|any|all|the)\b[^.\n]{0,20}\b(api keys?|tokens?|passwords?|secrets?|credentials?|system prompt)\b/i],
   ['concealment', /\b(do not|don't|never) (tell|mention|reveal|inform)\b[^.\n]{0,30}\b(user|anyone|human)/i],
   ['hidden_markup', /<!--[\s\S]*?-->|\u200b|\u200c|\u200d|\u2060|<\s*(system|assistant)\s*>/i]
 ];
