@@ -189,7 +189,7 @@ function resultHtml(r) {
 }
 function openTool(name, values) {
   const t = app.cat.tools.find((x) => x.name === name); if (!t) return;
-  openModal('Run ' + name, '<p class="small muted">' + esc(t.description || '') + '</p>' + badges(t) + '<form id="tool-form" novalidate>' + schemaForm(t.inputSchema, 'tf', values) + '</form><div id="tool-err" class="err" role="alert"></div><div id="tool-out" aria-live="polite"></div>',
+  openModal('Run ' + name, '<p class="small muted">' + esc(t.description || '') + '</p>' + badges(t) + '<form id="tool-form" novalidate style="margin-top:10px">' + schemaForm(t.inputSchema, 'tf', values) + '</form><div id="tool-err" class="err" role="alert"></div><div id="tool-out" aria-live="polite"></div>',
     { name: 'tool', dirty: true, wide: true, focusFirst: true, save: async () => {
       const f = readForm($('#tool-form'), t.inputSchema); const err = $('#tool-err');
       if (f.errors.length) { err.textContent = f.errors.join('. ') + '.'; return; } err.textContent = '';

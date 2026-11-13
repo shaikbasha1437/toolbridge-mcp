@@ -64,7 +64,7 @@ export function schemaForm(schema, prefix, values) {
   if (!Object.keys(props).length) return '<p class="muted small">This takes no arguments.</p>';
   return Object.entries(props).map(([k, p]) => {
     const id = prefix + '-' + k; const label = '<label for="' + id + '">' + esc(k) + (req.has(k) ? ' <span class="req" title="required">*</span>' : '') + '</label>';
-    const help = p.description || p.examples ? '<div class="help">' + esc(p.description || '') + (p.examples ? ' e.g. ' + esc(p.examples[0]) : '') + (p.default !== undefined ? ' (default ' + esc(JSON.stringify(p.default)) + ')' : '') + '</div>' : '';
+    const help = p.description || p.examples ? '<div class="help">' + esc(p.description || '') + (p.examples && !String(p.description || '').includes(String(p.examples[0])) ? ' e.g. ' + esc(p.examples[0]) : '') + (p.default !== undefined ? ' (default ' + esc(JSON.stringify(p.default)) + ')' : '') + '</div>' : '';
     const t = [].concat(p.type || 'string')[0]; const cur = v[k];
     let input;
     if (p.enum) input = '<select id="' + id + '" data-key="' + esc(k) + '" data-type="' + t + '"><option value="">' + (req.has(k) ? 'Choose…' : '(not set)') + '</option>' + p.enum.map((x) => '<option' + (cur === x ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select>';
